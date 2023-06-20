@@ -1,15 +1,13 @@
-const mongoose = require('mongose');
+const mongoose = require('mongoose');
 
-mongoose.set('strictQuery', false);
-
-const connectDBDB = async() => {
+const connectDB = async() => {
     try {
         const connection = await mongoose.connect(process.env.MONGO_URL);
         console.log(`Connect to MongoDB ${connection.connection.host}`);
     } catch (error) {
-        console.log('Nepavyko prisijungti', error);
+        console.log('Nepavyko prisijungti ', error);
         process.exit(1);
     }
 }
 
-module.expots = connectDB;
+module.exports = connectDB;
