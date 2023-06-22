@@ -1,10 +1,11 @@
 const asyncHandler = require('express-async-handler');
 
-// const Ad = require('../models/adModel');
+ const Ad = require('../models/adModel');
 
 // @desc Get goals
 // @route GET /api/goals
 // @access PRIVATE
+
 const getAds = asyncHandler(async (req, res) => {
   const ads = await Ad.find({ user: req.user.id })
   res.status(200).json(ads)
@@ -27,9 +28,10 @@ const setAd = asyncHandler(async (req, res) => {
     res.status(200).json(ad)
   })
 
-  // @desc Update goal
-// @route PUT /api/goals/:id
-// @access PRIVATE
+//@desc Update goal
+//@route PUT /api/goals/:id
+//@access PRIVATE
+
 const updateAd = asyncHandler(async (req, res) => {
   const ad = await Ad.findById(req.params.id)
 
@@ -59,6 +61,7 @@ const updateAd = asyncHandler(async (req, res) => {
 // @desc Delete goal
 // @route DELETE /api/goals/:id
 // @access PRIVATE
+
 const deleteAd = asyncHandler(async (req, res) => {
   const ad = await Ad.findById(req.params.id)
 
@@ -79,7 +82,7 @@ const deleteAd = asyncHandler(async (req, res) => {
     throw new Error('User not authorized')
   }
 
-  await ad.remove()
+  await ad.deleteOne()
 
   res.status(200).json({ id: req.params.id })
 })
